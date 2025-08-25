@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>الشهادات المعتمدة - World Languages Hub</title>
+    <link rel="icon" type="image/png" href="image/logo.png">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #000;
+        color: #fff;
+        direction: rtl;
+      }
+
+      header {
+        background-color: #111;
+        padding: 15px 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        height: 8em;
+        display: flex;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 1100px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .container a {
+        text-decoration: none;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #ff6600;
+        cursor: pointer;
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+        margin: 0;
+        padding: 0;
+      }
+
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+      }
+
+      nav ul li a:hover {
+        color: #ff6600;
+      }
+
+      nav a {
+        color: #fff;
+        margin: 0 10px;
+        text-decoration: none;
+      }
+
+      /* زر الهامبرغر */
+      .menu-hamburger {
+        display: flex;
+        position: relative;
+        width: auto;
+        height: 50px;
+        cursor: pointer;
+        z-index: 2001;
+        align-items: center;
+        gap: 10px;
+        direction: ltr;
+      }
+      .menu-hamburger .icon {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        line-height: 0;
+      }
+      .menu-hamburger .icon span {
+        display: block;
+        height: 4px;
+        width: 22px;
+        background: #fff;
+        margin: 4px 0;
+        border-radius: 3px;
+        transition: 0.3s;
+      }
+      .menu-hamburger .menu-label {
+        color: #fff;
+        font-weight: 700;
+        font-size: 1rem;
+      }
+
+      .menu-hamburger nav {
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        top: 50%;
+        left: 100%;
+        transform: translateY(-50%) translateX(-10px) scale(0.98);
+        background: #111;
+        width: auto;
+        min-width: 300px;
+        border-radius: 16px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+        padding: 15px 20px;
+        z-index: 2002;
+        text-align: center;
+        direction: rtl;
+        transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+          transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.35s;
+      }
+
+      .menu-hamburger:hover nav,
+      .menu-hamburger:focus nav {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(-50%) translateX(0) scale(1);
+      }
+
+      .menu-hamburger nav ul {
+        flex-direction: row;
+        gap: 15px;
+        padding: 0;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .menu-hamburger nav ul li {
+        margin: 0;
+      }
+      .menu-hamburger nav {
+        width: auto;
+        min-width: 300px;
+        text-align: center;
+      }
+      .menu-hamburger nav ul li a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        display: block;
+        padding: 8px 0;
+        transition: color 0.3s;
+      }
+      .menu-hamburger nav ul li a:hover {
+        color: #ff6600;
+      }
+	 
+	 
+	  .top-actions {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+      .language-select {
+        background: linear-gradient(120deg, #141414 60%, #231f1e 100%);
+        color: white;
+        border: 1px solid #aaa;
+        border-radius: 4px;
+        padding: 6px 18px;
+        font-size: 1rem;
+        outline: none;
+      }
+      .sign-in {
+        background: #ff6600;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 22px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+      }
+
+      main {
+        max-width: 1100px;
+        margin: 28px auto;
+        padding: 20px;
+      }
+      .page-hero {
+        background: linear-gradient(120deg, #141414 60%, #231f1e 100%);
+        border-radius: 12px;
+        padding: 28px;
+        text-align: center;
+      }
+      .page-hero h1 {
+        margin: 0 0 8px 0;
+        font-size: 2rem;
+        color: #fff;
+      }
+      .page-hero p {
+        margin: 0;
+        color: #ddd;
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 22px;
+      }
+      .card {
+        background: #222;
+        border-radius: 10px;
+        padding: 16px;
+        text-align: center;
+        overflow: hidden;
+      }
+      .card img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 8px;
+        display: block;
+        margin-bottom: 12px;
+      }
+      .card h3 {
+        margin: 8px 0;
+        color: #fff;
+        font-size: 1.2rem;
+      }
+      .card p {
+        margin: 0;
+        color: #ccc;
+        line-height: 1.5;
+      }
+
+    .footer {
+        background: #111;
+        padding: 40px 20px 20px;
+        color: #ccc;
+        margin-top: 40px;
+      }
+      .footer-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 30px;
+        max-width: 1200px;
+        margin: auto;
+      }
+      .footer-section h3 {
+        color: #ff6600;
+        margin-bottom: 15px;
+      }
+      .footer-section p {
+        line-height: 1.6;
+      }
+      .footer-section ul {
+        list-style: none;
+        padding: 0;
+      }
+      .footer-section ul li {
+        margin-bottom: 8px;
+      }
+      .footer-section ul li a {
+        color: #ccc;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      .footer-section ul li a:hover {
+        color: #ff6600;
+      }
+      .social-icons {
+        display: flex;
+        gap: 15px;
+      }
+      .social-icons a svg {
+        transition: transform 0.3s, fill 0.3s;
+      }
+      .social-icons a:hover svg {
+        transform: scale(1.1);
+        fill: #ff6600;
+      }
+      .footer-bottom {
+        border-top: 1px solid #333;
+        margin-top: 20px;
+        padding-top: 10px;
+        text-align: center;
+        font-size: 0.9rem;
+        color: #777;
+      }
+
+
+      @media (max-width: 700px) {
+        header {
+          padding: 18px;
+          height: auto;
+        }
+        .page-hero h1 {
+          font-size: 1.6rem;
+        }
+        .card img {
+          height: 160px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header (حُفظت كما في index.html) -->
+    <header>
+      <div class="container" style="display: flex; align-items: center; justify-content: space-between;">
+        <div class="logo">World Languages Hub</div>
+        <!-- صورة بجانب القائمة -->
+        <div style="display: flex; align-items: center; gap: 18px;">
+          <!-- زر الهامبرغر -->
+          <div
+            class="menu-hamburger"
+            tabindex="0"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-label="فتح القائمة"
+            style="display: flex; align-items: center;"
+          >
+            <div class="icon">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <span class="menu-label">Menu</span>
+            <!-- القائمة تظهر عند التحويم -->
+            <nav aria-label="القائمة الرئيسية">
+              <ul>
+                <li><a href="World Languages Hub.html">الرئيسية</a></li>
+                <li><a href="Courses.html">الكورسات</a></li>
+                <li><a href="Accredited certificates.html">الشهادات</a></li>
+                <li><a href="About Us.html">من نحن</a></li>
+                <li><a href="index.html">تسجيل الخروج</a></li>
+              </ul>
+            </nav>
+          </div>
+          <!-- صورة احترافية بجانب القائمة -->
+          <div class="profile-img-wrapper" style="margin-right: 0;">
+            <img 
+              src="image/yousef.png" 
+              alt="profile" 
+              style="
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                object-fit: cover;
+                box-shadow: 0 2px 12px #0007;
+                background: #222;
+                display: block;
+              "
+            />
+          </div>
+        </div>
+      </div>
+    </header>
+    
+
+    <!-- محتوى الصفحة -->
+    <main>
+      <div class="page-hero">
+        <h1>الشهادات المعتمدة من World Languages Hub</h1>
+        <p>
+          الشهادات المعتمدة هي دليل رسمي على إكمالك للدورات واجتيازك لمعاييرنا
+          التعليمية. تمنح هذه الشهادات لحامليها ميزة عند التقديم للعمل أو
+          الدراسة، وتُظهر مستوى احترافي معتمد من مؤسستنا.
+        </p>
+      </div>
+
+      <section class="cards" aria-label="معلومات عن الشهادات">
+        <article class="card">
+          <img
+            src="image/20250818_1536_الشهادة من مركز اللغات_simple_compose_01k2yjsgbney19p87pg0sahsjz.png"
+            alt="أهمية الشهادات المعتمدة"
+          />
+          <h3>أهمية الشهادات المعتمدة</h3>
+          <p>
+            تمنح الشهادة المعتمدة خُتم الشركة وتاريخ الإصدار وتفاصيل المحتوى.
+            بعد إتمام الدورة واجتياز الاختبارات النهائية، يتم إصدار الشهادة
+            إلكترونياً عادة خلال 3-10 أيام عمل. يمكن طلب نسخة مطبوعة مع ختم رسمي
+            مقابل رسوم شحن بسيطة.
+          </p>
+        </article>
+
+        <article class="card">
+          <img
+            src="image/online-multiethnic-attractive-group-teachers-study-laught-discuss-something.jpg"
+            alt="ادرس من جميع أنحاء العالم"
+          />
+          <h3>ادرس من جميع أنحاء العالم</h3>
+          <p>
+            تقدم World Languages Hub دورات مرنة عبر الإنترنت تسمح لك بالدراسة من
+            أي مكان. نشكركم على دعمكم وثقتكم — نجاحكم هو هدفنا، ونتطلع لرؤية
+            إنجازاتكم. بعد حصولك على الشهادة، ستكون قادراً على مشاركتها عبر
+            الشبكات المهنية أو طباعتها للعرض الشخصي.
+          </p>
+        </article>
+      </section>
+
+   
+    </main>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-section about">
+          <h3>World Languages Hub</h3>
+          <p>
+            منصتك الشاملة لتعلم جميع لغات العالم مع أفضل المدربين والدروس
+            التفاعلية.
+          </p>
+        </div>
+
+        <div class="footer-section links">
+          <ul>
+            <li><a href="World Languages Hub.html">الرئيسية</a></li>
+            <li><a href="Courses.html">الكورسات</a></li>
+            <li><a href="Accredited certificates.html">الشهادات</a></li>
+            <li><a href="About Us.html">من نحن</a></li>
+            <li><a href="index.html">تسجيل الخروج</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section social">
+          <h4>تابعنا</h4>
+          <div class="social-icons">
+            <a href="#" aria-label="Facebook">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="#fff"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 23.403.597 24 
+              1.326 24h11.495v-9.294H9.691v-3.622h3.13V8.413c0-3.1 
+              1.893-4.788 4.659-4.788 1.325 0 2.464.099 
+              2.794.143v3.24l-1.918.001c-1.504 0-1.796.715-1.796 
+              1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.403 
+              24 24 23.403 24 22.674V1.326C24 .597 23.403 
+              0 22.675 0z"
+                />
+              </svg>
+            </a>
+            <a href="#" aria-label="Twitter">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="#fff"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M24 4.557a9.83 9.83 0 
+              0 1-2.828.775 4.932 4.932 0 
+              0 0 2.165-2.724 9.865 9.865 
+              0 0 1-3.127 1.195 4.916 4.916 
+              0 0 0-8.384 4.482A13.944 13.944 
+              0 0 1 1.671 3.149a4.916 4.916 
+              0 0 0 1.523 6.556 4.903 4.903 
+              0 0 1-2.229-.616v.062a4.917 
+              4.917 0 0 0 3.946 4.827 4.996 
+              4.996 0 0 1-2.224.084 4.918 
+              4.918 0 0 0 4.588 3.417A9.867 
+              9.867 0 0 1 0 19.54a13.94 
+              13.94 0 0 0 7.548 2.212c9.056 
+              0 14.01-7.496 14.01-13.986 
+              0-.213-.005-.425-.014-.636A9.935 9.935 0 
+              0 0 24 4.557z"
+                />
+              </svg>
+            </a>
+            <a href="#" aria-label="Instagram">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="#fff"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 
+              4.85.07 1.17.056 1.97.24 2.427.403a4.92 
+              4.92 0 0 1 1.77 1.153 4.92 4.92 0 
+              0 1 1.153 1.77c.163.457.347 
+              1.257.403 2.427.058 1.266.07 
+              1.646.07 4.85s-.012 3.584-.07 
+              4.85c-.056 1.17-.24 1.97-.403 
+              2.427a4.92 4.92 0 0 1-1.153 
+              1.77 4.92 4.92 0 0 1-1.77 
+              1.153c-.457.163-1.257.347-2.427.403-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.056-1.97-.24-2.427-.403a4.92 
+              4.92 0 0 1-1.77-1.153 4.92 
+              4.92 0 0 1-1.153-1.77c-.163-.457-.347-1.257-.403-2.427C2.175 
+              15.584 2.163 15.204 2.163 
+              12s.012-3.584.07-4.85c.056-1.17.24-1.97.403-2.427a4.92 
+              4.92 0 0 1 1.153-1.77 4.92 
+              4.92 0 0 1 1.77-1.153c.457-.163 
+              1.257-.347 2.427-.403C8.416 2.175 
+              8.796 2.163 12 2.163zm0 3.675a6.162 
+              6.162 0 1 0 0 12.324 6.162 
+              6.162 0 0 0 0-12.324zm6.406-1.845a1.44 
+              1.44 0 1 0 0 2.88 1.44 
+              1.44 0 0 0 0-2.88z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 World Languages Hub - جميع الحقوق محفوظة</p>
+      </div>
+    </footer>
+    
+  </body>
+</html>

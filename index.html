@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>World Languages Hub</title>
+    <link rel="icon" type="image/png" href="image/logo.png">
+    <!-- SEO -->
+    <meta name="description" content="World Languages Hub — Open the doors to the world by learning languages. الاشتراك يبدأ من EGP 50 فقط." />
+    <meta name="keywords" content="languages, learn languages, English, French, Spanish, Chinese, World Languages Hub, online courses" />
+    <meta name="author" content="World Languages Hub" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#141414" />
+    <meta name="color-scheme" content="dark light" />
+    <link rel="canonical" href="#" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="World Languages Hub — تعلم اللغات / Learn Languages" />
+    <meta property="og:description" content="Learn English, French, Spanish, Chinese and more — Affordable subscriptions starting from EGP 50." />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1503676382389-4809596d5290" />
+    <meta property="og:image:alt" content="https://images.unsplash.com/photo-1503676382389-4809596d5290" />
+    <meta property="og:url" content="https://yousef-gamal2023.github.io/new-project/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="World Languages Hub" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="https://yousef-gamal2023.github.io/new-project/" />
+    <meta name="twitter:title" content="World Languages Hub — تعلم اللغات / Learn Languages" />
+    <meta name="twitter:description" content="Affordable language courses — subscriptions from EGP 50. تعلم اللغات بسهولة وفعالية." />
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1503676382389-4809596d5290" />
+
+    <!-- Alternate / i18n -->
+    <link rel="alternate" hreflang="en" href="/" />
+    <link rel="alternate" hreflang="ar" href="/?lang=ar" />
+
+    <!-- PWA / icons -->
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="image/logo.png" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- Referrer policy (better privacy for external links) -->
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        height: 70vh;
+        background: black;
+        color: #fff;
+        font-family: "Segoe UI", "Arial", sans-serif;
+        box-sizing: border-box;
+        overflow-x: hidden;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 60px 0 60px;
+        height: 8em;
+        background: linear-gradient(120deg, #141414 60%, #231f1e 100%);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+      .logo a {
+        text-decoration: none;
+        font-size: 2.8rem;
+        font-weight: bold;
+        color: #ff000d;
+        letter-spacing: 2px;
+        font-family: "Arial Black", "Arial", sans-serif;
+        font-style: oblique;
+
+        height: 32px;
+      }
+      textPath {
+        font-size: x-large;
+      }
+      svg {
+        width: 8em;
+        margin-bottom: 1em;
+      }
+
+      .top-actions {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+      .language-select {
+        background: linear-gradient(120deg, #141414 60%, #231f1e 100%);
+        color: white;
+        border: 1px solid #aaa;
+        border-radius: 4px;
+        padding: 6px 18px;
+        font-size: 1rem;
+        outline: none;
+        margin-right: 8px;
+      }
+      .language-select option {
+        background-color: #000; /* خلفية القائمة */
+        color: #fff; /* لون النص الافتراضي */
+      }
+
+      .sign-in {
+        background: #ff6600;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 22px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .sign-in:hover {
+        background: #b0060f;
+      }
+      .logo {
+        margin-top: 0;
+      }
+      main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 80vh;
+      }
+      .main-content {
+        background: linear-gradient(120deg, #141414 60%, #231f1e 100%);
+        border-radius: 16px;
+        padding: 48px 36px 40px 36px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 480px;
+        width: 100%;
+        margin-top: 40px;
+      }
+      .main-content h1 {
+        font-size: 2.6rem;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 18px;
+        line-height: 1.2;
+      }
+      .main-content h2 {
+        font-size: 1.3rem;
+        font-weight: 400;
+        text-align: center;
+        margin-bottom: 18px;
+        color: #fff;
+      }
+      .main-content p {
+        font-size: 1.1rem;
+        text-align: center;
+        margin-bottom: 24px;
+        color: #ddd;
+      }
+      .email-form {
+        display: flex;
+        width: 100%;
+        gap: 10px;
+        margin-top: 8px;
+      }
+      .email-form input[type="email"] {
+        flex: 1;
+        padding: 14px 16px;
+        font-size: 1.1rem;
+        border: none;
+        border-radius: 4px 0 0 4px;
+        outline: none;
+        background: #222;
+        color: #fff;
+        border-right: 1px solid #444;
+      }
+      .email-form button {
+        background: #ff6600;
+        color: #fff;
+        border: none;
+        border-radius: 0 4px 4px 0;
+        padding: 0 32px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .email-form button:hover {
+        background: #b0060f;
+      }
+      /* الحالة الافتراضية */
+      #email-input {
+        border: 2px solid #aaa;
+        background: rgba(0, 0, 0, 0.4);
+        color: #fff;
+        font-size: 1.2rem;
+        padding: 15px 15px 15px 15px;
+        border-radius: 8px;
+        outline: none;
+        width: 100%;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        box-sizing: border-box;
+      }
+
+      /* عند التركيز */
+      #email-input:focus {
+        border-color: #fff;
+        box-shadow: 0 0 0 2px #fff2;
+      }
+
+      /* عند صحة الإيميل */
+      #email-input.valid {
+        border-color: #1dd05d;
+        box-shadow: 0 0 0 2px #1dd05d44;
+        color: #fff;
+      }
+
+      /* عند الخطأ */
+      #email-input.invalid {
+        border-color: #e50914;
+        box-shadow: 0 0 0 2px #e5091444;
+        background: rgba(0, 0, 0, 0.4);
+        color: #fff;
+      }
+      .form-input {
+        flex: 1;
+        padding: 14px 16px;
+        font-size: 1.1rem;
+        border: none;
+        border-radius: 4px 0 0 4px;
+        outline: none;
+        background: #222;
+        color: #fff;
+        border-right: 1px solid #444;
+        border: 2px solid #aaa;
+        background: rgba(0, 0, 0, 0.4);
+        color: #fff;
+        font-size: 1.2rem;
+        padding: 15px 15px 15px 15px;
+        border-radius: 8px;
+        outline: none;
+        width: 100%;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        box-sizing: border-box;
+        margin: 0;
+      }
+
+      /* عند التركيز */
+      .form-input:focus {
+        border-color: #fff;
+        box-shadow: 0 0 0 2px #fff2;
+      }
+
+      /* عند صحة الإدخال */
+      .form-input.valid {
+        border-color: #1dd05d;
+        box-shadow: 0 0 0 2px #1dd05d44;
+        color: #fff;
+      }
+
+      /* عند الخطأ */
+      .form-input.invalid {
+        border-color: #e50914;
+        box-shadow: 0 0 0 2px #e5091444;
+        background: rgba(0, 0, 0, 0.4);
+        color: #fff;
+      }
+
+      .social-login {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        width: 100%;
+        margin-top: 30px;
+      }
+
+      .divider {
+        display: flex;
+        align-items: center;
+        color: #ccc;
+        font-size: 0.9rem;
+        margin: 10px 0;
+      }
+      .divider::before,
+      .divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: #444;
+      }
+      .divider span {
+        margin: 0 10px;
+      }
+
+      .social-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        padding: 12px;
+        border: none;
+        border-radius: 50px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        background: #fff;
+        color: #333;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      .social-btn img {
+        width: 20px;
+        height: 20px;
+      }
+      .social-btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .social-btn.google {
+        background: #fff;
+        border: 1px solid #ddd;
+      }
+      .social-btn.facebook {
+        background: #1877f2;
+        color: #fff;
+      }
+      .social-btn.apple {
+        background: #5d5d5d;
+        color: #fff;
+      }
+
+      .trending-section {
+        width: 90%;
+        max-width: 1250px;
+        margin: 60px auto 0 auto;
+      }
+
+      .trending-title {
+        font-size: 2.1rem;
+        font-weight: bold;
+        margin-bottom: 28px;
+        margin-left: 18px;
+        letter-spacing: 1px;
+      }
+
+      .trending-list-wrapper {
+        position: relative;
+        width: 100%;
+        overflow: visible;
+        padding-right: 40px; /* مساحة للسهم */
+      }
+
+      .trending-list {
+        display: flex;
+        gap: 40px;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        padding-bottom: 8px;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE 10+ */
+        clip-path: inset(0 0 0 0 round 16px); /* قص الحواف */
+      }
+
+      .trending-list::-webkit-scrollbar {
+        display: none;
+      }
+
+      .trending-card {
+        background: linear-gradient(120deg, #141414 60%, #231f1e 100%);
+        border-radius: 12px;
+        width: 280px;
+        height: 320px;
+        position: relative;
+
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-start;
+        transition: transform 0.18s, box-shadow 0.18s;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+
+      .trending-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 1;
+      }
+
+      .trending-number {
+        font-size: 2.8rem;
+        font-weight: 900;
+        color: transparent;
+        -webkit-text-stroke: 3px #fff;
+        margin-right: 14px;
+        text-shadow: 4px 6px 18px #000a;
+        font-family: "Arial Black", Arial, sans-serif;
+        /* تم نقل بعض الخصائص من الأنماط المضمنة */
+      }
+
+      .trending-label {
+        position: absolute;
+        left: 18px;
+        bottom: 18px;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.45);
+        border-radius: 8px;
+        padding: 6px 18px 6px 18px;
+        box-shadow: 0 2px 12px #0006;
+        gap: 10px;
+        /* لمظهر احترافي */
+      }
+
+      .trending-course {
+        color: #ff6600;
+        font-size: 1.3rem;
+        font-weight: bold;
+        text-shadow: 1px 1px 8px #000;
+        letter-spacing: 1px;
+        font-family: "Segoe UI", Arial, sans-serif;
+        -webkit-text-stroke: 0;
+      }
+
+      .btn {
+        background: #ff6600;
+        color: white;
+        padding: 10px 20px;
+        display: inline-block;
+        margin-top: 10px;
+        border-radius: 5px;
+        text-decoration: none;
+         transition: background 0.2s;
+      }
+
+      .btn:hover {
+        background: #b0060f;
+      }
+
+      footer {
+        background: #111;
+        padding: 20px;
+        text-align: center;
+      }
+      @media (max-width: 1368px) {
+        .trending-section {
+          max-width: 98vw;
+        }
+        .trending-card {
+          width: 220px;
+          height: 260px;
+          flex-wrap: wrap;
+        }
+        .main-content {
+          max-width: 400px;
+        }
+        header {
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+      }
+
+      @media (max-width: 1124px) {
+        .trending-section {
+          max-width: 100vw;
+        }
+        .trending-list {
+          justify-content: center;
+        }
+        .trending-card {
+          width: 180px;
+          height: 210px;
+        }
+        .main-content {
+          max-width: 340px;
+          padding: 24px 6px 18px 6px;
+        }
+        .trending-title {
+          font-size: 1.5rem;
+        }
+        header {
+          padding-left: 10px;
+          padding-right: 10px;
+        }
+        .logo a {
+          font-size: 2rem;
+        }
+      }
+
+      @media (max-width: 968px) {
+        header {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 18px 6px 0 6px;
+          height: auto;
+        }
+        .main-content {
+          padding: 18px 2px 14px 2px;
+          max-width: 99vw;
+        }
+        .main-content h1 {
+          font-size: 1.3rem;
+        }
+        .trending-section {
+          margin-top: 30px;
+        }
+        .trending-title {
+          font-size: 1.1rem;
+          margin-left: 6px;
+        }
+        .trending-card {
+          width: 120px;
+          height: 140px;
+        }
+        .trending-label {
+          left: 8px;
+          bottom: 8px;
+          padding: 4px 8px;
+          font-size: 0.8rem;
+        }
+        .trending-number {
+          font-size: 1.2rem;
+          -webkit-text-stroke: 1.5px #fff;
+        }
+        .trending-course {
+          font-size: 0.9rem;
+        }
+        .top-actions {
+          gap: 8px;
+        }
+        .language-select,
+        .sign-in {
+          font-size: 1.2rem;
+          padding: 6px 10px;
+        }
+      }
+
+      @media (max-width: 700px) {
+        body {
+          overflow-x: hidden;
+        }
+        header {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 24px 16px 0 16px;
+        }
+        .main-content {
+          padding: 32px 10px 28px 10px;
+          max-width: 98vw;
+        }
+        .main-content h1 {
+          font-size: 2rem;
+        }
+        .trending-list {
+          flex-direction: column;
+          gap: 18px;
+          padding-bottom: 0;
+        }
+        .trending-card {
+          width: 100% !important;
+          min-width: 0;
+          max-width: 100vw;
+          height: auto;
+          aspect-ratio: 16/9;
+          border-radius: 14px;
+        }
+        .trending-img {
+          border-radius: 14px;
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+          position: static;
+        }
+        .trending-section {
+          padding: 0 2vw;
+          margin-top: 18px;
+        }
+      }
+      @media (max-width: 480px) {
+        .trending-card {
+          aspect-ratio: 1/1;
+        }
+        .trending-label {
+          left: 4px;
+          bottom: 4px;
+          padding: 2px 6px;
+        }
+      }
+
+      .password-wrapper {
+        position: relative;
+        flex: 1;
+        display: flex;
+        align-items: center;
+      }
+      .password-wrapper .form-input {
+        padding-right: 44px !important;
+      }
+      #toggle-password {
+        position: absolute;
+        top: 50%;
+        right: 16px;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #aaa;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        height: 24px;
+      }
+
+      /* swap animation between email and password */
+      @keyframes fadeOutLeft {
+        from {
+          opacity: 1;
+          transform: translateX(0);
+        }
+        to {
+          opacity: 0;
+          transform: translateX(-12px);
+        }
+      }
+      @keyframes fadeInRight {
+        from {
+          opacity: 0;
+          transform: translateX(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .swap-out {
+        animation: fadeOutLeft 220ms ease forwards;
+        will-change: transform, opacity;
+      }
+      .swap-in {
+        animation: fadeInRight 260ms ease forwards;
+        will-change: transform, opacity;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top Bar -->
+    <header>
+      <div class="logo">
+        <a href="#" style="display: inline-block; padding: 0; margin: 0">
+          <svg
+            width="100%"
+            height="auto"
+            viewBox="44 22 350 30"
+            preserveAspectRatio="xMidYMid meet"
+            xmlns="http://www.w3.org/2000/svg"
+            style="display: block; border-radius: 20px; overflow: hidden"
+          >
+            <defs>
+              <linearGradient
+                id="text-gradient"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="0%"
+              >
+                <stop offset="0%" stop-color="#ff6600" />
+                <stop offset="100%" stop-color="#ff6600" />
+              </linearGradient>
+
+              <!-- قللنا النهاية إلى 440 -->
+              <path id="curve" d="M0,65 Q65,25 440,50" />
+            </defs>
+
+            <text
+              font-family="'Arial Black', Arial, sans-serif"
+              font-size="44"
+              fill="url(#text-gradient)"
+              letter-spacing="3"
+              text-anchor="middle"
+            >
+              <textPath xlink:href="#curve" startOffset="50%">
+                World Languages Hub
+              </textPath>
+            </text>
+          </svg>
+        </a>
+      </div>
+      <div class="top-actions">
+        <select class="language-select">
+          <option>English</option>
+          <option>العربية</option>
+        </select>
+        <button class="sign-in" onclick="location.href='Join now.html'">Join now</button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <div class="main-content">
+        <h1 id="main-title">
+          Open the doors to the world by learning languages
+        </h1>
+        <h2 id="main-subtitle">Subscriptions start from EGP 50 only.</h2>
+        <p id="main-desc">
+          From English to Spanish, French, and more – learn in an easy and
+          effective way.
+        </p>
+        <form class="email-form" onsubmit="return handleLogin(event)">
+          <input
+            id="email-input"
+            type="email"
+            placeholder="Email address"
+            required
+            class="form-input"
+          />
+          <button id="get-started-btn" type="submit">Get Started</button>
+
+          <div
+            class="password-wrapper"
+            style="display: none; position: relative; flex: 1"
+          >
+            <input
+              id="password-input"
+              type="password"
+              placeholder="Password"
+              autocomplete="new-password"
+              class="form-input"
+              style="padding-right: 44px"
+            />
+            <span
+              id="toggle-password"
+              style="
+                position: absolute;
+                top: 50%;
+                right: 16px;
+                transform: translateY(-50%);
+                cursor: pointer;
+                color: #aaa;
+                z-index: 2;
+                display: flex;
+                align-items: center;
+              "
+            >
+              <!-- SVG أيقونة العين -->
+              <svg
+                id="eye-icon"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                style="width: fit-content; margin-top: 15px"
+              >
+                <path
+                  d="M1 12C2.7 7.6 7.1 4.5 12 4.5C16.9 4.5 21.3 7.6 23 12C21.3 16.4 16.9 19.5 12 19.5C7.1 19.5 2.7 16.4 1 12Z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <circle
+                  id="eye-ball"
+                  cx="12"
+                  cy="12"
+                  r="3.5"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <line
+                  id="eye-slash"
+                  x1="5"
+                  y1="19"
+                  x2="19"
+                  y2="5"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  style="display: none"
+                />
+              </svg>
+            </span>
+          </div>
+          <button
+            id="continue-btn"
+            type="button"
+            style="display: none; margin-left: 10px"
+            onclick="submitPassword()"
+          >
+            Continue
+          </button>
+        </form>
+        <div class="social-login">
+          <div class="divider">
+            <span>Or</span>
+          </div>
+          <button
+            class="social-btn google"
+            onclick="openLocalFile('World Languages Hub.html')"
+          >
+            <img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/google.svg"
+              alt=""
+            />
+            &nbsp; &nbsp; Continue with Google
+          </button>
+          <button
+            class="social-btn facebook"
+            onclick="openLocalFile('World Languages Hub.html')"
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_(2019).png"
+              alt=""
+            />
+            Continue with Facebook
+          </button>
+          <button
+            class="social-btn apple"
+            onclick="openLocalFile('World Languages Hub.html')"
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
+              alt=""
+            />
+            &nbsp; &nbsp; &nbsp; Continue with Apple
+          </button>
+        </div>
+      </div>
+    </main>
+    <!-- Trending Now Section -->
+    <section class="trending-section">
+      <h2 class="trending-title">training now</h2>
+      <div class="trending-list-wrapper">
+        <div class="trending-list" id="trending-list">
+          <div class="trending-card">
+            <a href="#" target="_blank">
+              <img
+                src="image/pexels-yankrukov-language.jpg"
+                alt="1"
+                class="trending-img"
+              />
+            </a>
+            <span class="trending-label">
+              <span class="trending-number">1</span>
+              <span class="trending-course">English</span>
+            </span>
+          </div>
+          <div class="trending-card">
+            <a href="#" target="_blank">
+              <img
+                src="image/pexels-mikhail-nilov-france.jpg"
+                alt="2"
+                class="trending-img"
+              />
+            </a>
+            <span class="trending-label">
+              <span class="trending-number">2</span>
+              <span class="trending-course">French</span>
+            </span>
+          </div>
+          <div class="trending-card">
+            <a href="#" target="_blank">
+              <img
+                src="https://images.unsplash.com/photo-1513258496099-48168024aec0"
+                alt="3"
+                class="trending-img"
+              />
+            </a>
+            <span class="trending-label">
+              <span class="trending-number">3</span>
+              <span class="trending-course">Chinese</span>
+            </span>
+          </div>
+          <div class="trending-card">
+            <a href="#" target="_blank">
+              <img
+                src="https://images.unsplash.com/photo-1503676382389-4809596d5290"
+                alt="4"
+                class="trending-img"
+              />
+            </a>
+            <span class="trending-label">
+              <span class="trending-number">4</span>
+              <span class="trending-course">Spain</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- انضم الآن -->
+    <section style="text-align: center">
+      <h2 id="cta-title">انضم الآن</h2>
+      <p id="cta-text">سجل الآن واحصل على خصم 15% على أول كورس.</p>
+      <a href="#" class="btn" id="cta-register">سجل الآن</a>
+    </section>
+    <br />
+    <footer>
+      <p>© 2025 World Languages Hub - جميع الحقوق محفوظة</p>
+    </footer>
+    <script>
+      const translations = {
+        en: {
+          title: "Open the doors to the world by learning languages",
+          subtitle: "Subscriptions start from EGP 50 only",
+          desc: "From English to Spanish, French, and more – learn in an easy and effective way",
+          email: "Enter your email",
+          btn: "Get Started",
+          signin: "Join now",
+          password: "Enter your password",
+          continue: "Continue",
+          footer: "© 2025 World Languages Hub - All rights reserved",
+          ctaTitle: "Join now",
+          ctaText: "Sign up now and get 15% off your first course.",
+          ctaBtn: "Sign up"
+        },
+        ar: {
+          title: "افتح أبواب العالم بتعلم اللغات",
+          subtitle: "الاشتراك يبدأ من EGP 50 فقط",
+          desc: "من الإنجليزية إلى الإسبانية والفرنسية وأكثر – تعلم بأسلوب سهل وفعال",
+          email: "أدخل بريدك الإلكتروني",
+          btn: "أبدأ الآن",
+          signin: "أنضم الأن",
+          password: "أدخل كلمة المرور",
+          continue: "متابعة",
+          footer: "© 2025 World Languages Hub - جميع الحقوق محفوظة",
+          ctaTitle: "انضم الآن",
+          ctaText: "سجل الآن واحصل على خصم 15% على أول كورس.",
+          ctaBtn: "سجل الآن"
+        },
+      };
+
+      const langSelect = document.querySelector(".language-select");
+      const mainTitle = document.getElementById("main-title");
+      const mainSubtitle = document.getElementById("main-subtitle");
+      const mainDesc = document.getElementById("main-desc");
+      const emailInput = document.getElementById("email-input");
+      const getStartedBtn = document.getElementById("get-started-btn");
+      const signInBtn = document.querySelector(".sign-in");
+      const passwordInput = document.getElementById("password-input");
+      const continueBtn = document.getElementById("continue-btn");
+      const passwordWrapper = document.querySelector(".password-wrapper");
+      const togglePassword = document.getElementById("toggle-password");
+      const eyeIcon = document.getElementById("eye-icon");
+      const eyeSlash = document.getElementById("eye-slash");
+      const eyeBall = document.getElementById("eye-ball");
+      const footerText = document.querySelector("footer p");
+      // new: CTA elements
+      const ctaTitleEl = document.getElementById("cta-title");
+      const ctaTextEl = document.getElementById("cta-text");
+      const ctaBtnEl = document.getElementById("cta-register");
+
+      function updatePasswordIcon() {
+        eyeSlash.style.display =
+          passwordInput.type === "password" ? "" : "none";
+      }
+
+      // اضغط واستمر لعرض الباسورد (ماوس)
+      togglePassword.addEventListener("click", function (e) {
+        e.preventDefault();
+        passwordInput.type =
+          passwordInput.type === "password" ? "text" : "password";
+        updatePasswordIcon();
+      });
+
+      // عند إظهار حقل الباسورد، أظهر الحاوية مع الأيقونة
+      function showPasswordField() {
+        passwordWrapper.style.display = "";
+        togglePassword.style.display = "";
+        passwordInput.style.display = "";
+        updatePasswordIcon();
+      }
+
+      langSelect.addEventListener("change", function () {
+        if (this.value === "العربية") {
+          document.documentElement.lang = "ar";
+          document.body.dir = "rtl";
+          mainTitle.textContent = translations.ar.title;
+          mainSubtitle.textContent = translations.ar.subtitle;
+          mainDesc.textContent = translations.ar.desc;
+          emailInput.placeholder = translations.ar.email;
+          getStartedBtn.textContent = translations.ar.btn;
+          signInBtn.textContent = translations.ar.signin;
+          passwordInput.placeholder = translations.ar.password;
+          continueBtn.textContent = translations.ar.continue;
+          if (footerText) footerText.textContent = translations.ar.footer;
+          // update CTA
+          if (ctaTitleEl) ctaTitleEl.textContent = translations.ar.ctaTitle;
+          if (ctaTextEl) ctaTextEl.textContent = translations.ar.ctaText;
+          if (ctaBtnEl) ctaBtnEl.textContent = translations.ar.ctaBtn;
+        } else {
+          document.documentElement.lang = "en";
+          document.body.dir = "ltr";
+          mainTitle.textContent = translations.en.title;
+          mainSubtitle.textContent = translations.en.subtitle;
+          mainDesc.textContent = translations.en.desc;
+          emailInput.placeholder = translations.en.email;
+          getStartedBtn.textContent = translations.en.btn;
+          signInBtn.textContent = translations.en.signin;
+          passwordInput.placeholder = translations.en.password;
+          continueBtn.textContent = translations.en.continue;
+          if (footerText) footerText.textContent = translations.en.footer;
+          // update CTA
+          if (ctaTitleEl) ctaTitleEl.textContent = translations.en.ctaTitle;
+          if (ctaTextEl) ctaTextEl.textContent = translations.en.ctaText;
+          if (ctaBtnEl) ctaBtnEl.textContent = translations.en.ctaBtn;
+        }
+      });
+
+      // Apply initial language state to footer and placeholders
+      langSelect.dispatchEvent(new Event("change"));
+
+      emailInput.addEventListener("input", function () {
+        const value = emailInput.value.trim();
+        // تحقق من صحة الإيميل
+        const isValid = /^[^@]+@[^@]+\.[^@]+$/.test(value);
+
+        emailInput.classList.remove("valid", "invalid");
+
+        if (value.length === 0) {
+          // لا شيء
+        } else if (isValid) {
+          emailInput.classList.add("valid");
+        } else {
+          emailInput.classList.add("invalid");
+        }
+      });
+
+      function animateOut(...els) {
+        return new Promise((resolve) => {
+          let done = 0,
+            total = els.length;
+          const onEnd = () => {
+            if (++done === total) resolve();
+          };
+          els.forEach((el) => {
+            el.classList.remove("swap-in");
+            el.classList.add("swap-out");
+            el.addEventListener("animationend", onEnd, { once: true });
+          });
+        });
+      }
+      function animateIn(...els) {
+        els.forEach((el) => {
+          el.classList.remove("swap-out");
+          void el.offsetWidth; // reflow
+          el.classList.add("swap-in");
+        });
+      }
+
+      document
+        .querySelector(".email-form")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+          const value = emailInput.value.trim();
+          const isValid = /^[^@]+@[^@]+\.[^@]+$/.test(value);
+
+          if (!isValid) {
+            emailInput.classList.add("invalid");
+            emailInput.focus();
+            return;
+          }
+
+          await animateOut(emailInput, getStartedBtn);
+
+          emailInput.style.display = "none";
+          getStartedBtn.style.display = "none";
+
+          showPasswordField();
+          continueBtn.style.display = "";
+
+          passwordInput.value = "";
+          passwordInput.classList.remove("valid", "invalid");
+          passwordInput.placeholder =
+            document.body.dir === "rtl"
+              ? translations.ar.password
+              : translations.en.password;
+          continueBtn.textContent =
+            document.body.dir === "rtl"
+              ? translations.ar.continue
+              : translations.en.continue;
+
+          animateIn(passwordWrapper, continueBtn);
+          passwordInput.focus();
+        });
+
+      // تحقق من الباسورد (مثال: 6 أحرف أو أكثر)
+      passwordInput.addEventListener("input", function () {
+        const value = passwordInput.value;
+        passwordInput.classList.remove("valid", "invalid");
+        if (value.length === 0) {
+          // لا شيء
+        } else if (value.length >= 6) {
+          passwordInput.classList.add("valid");
+        } else {
+          passwordInput.classList.add("invalid");
+        }
+      });
+
+      // زر المتابعة (يمكنك إضافة منطق تسجيل الدخول هنا)
+      continueBtn.addEventListener("click", function () {
+        const value = passwordInput.value;
+        if (value.length >= 6) {
+          // alert("Login successful!");
+          window.location.href = "World Languages Hub.html";
+        } else {
+          passwordInput.classList.add("invalid");
+          passwordInput.focus();
+        }
+      });
+
+      // إضافة دعم الضغط على Enter في حقل الباسورد
+      passwordInput.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          continueBtn.click();
+        }
+      });
+
+      function openLocalFile(path) {
+        window.location.href = path;
+      }
+
+      // منع المتصفح من حفظ موضع التمرير بعد الريفرش
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+
+      // تمرير ناعم إلى حقل الإيميل عند الضغط على أي صورة من الترند
+      document
+        .getElementById("cta-register")
+        ?.addEventListener("click", (e) => {
+          e.preventDefault();
+          scrollToEmail();
+        });
+
+      function scrollToEmail() {
+        const input = document.getElementById("email-input");
+        if (!input) return;
+        input.scrollIntoView({ behavior: "smooth", block: "center" });
+        setTimeout(() => input.focus(), 600);
+      }
+      
+      // زر "سجل الآن" ينقلك إلى حقل الباسورد
+      document.querySelectorAll('button, .btn, .cta-btn').forEach(function(btn) {
+        if (
+          btn.textContent.trim() === "سجل الآن" ||
+          btn.textContent.trim() === "Join Now"
+        ) {
+          btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            
+            // مرر إلى حقل الباسورد وركز عليه
+            passwordInput.scrollIntoView({ behavior: "smooth", block: "center" });
+            setTimeout(() => passwordInput.focus(), 600);
+          });
+        }
+      });
+
+
+      
+      document
+        .querySelectorAll(".trending-card a, .trending-card .trending-img")
+        .forEach((el) => {
+          el.addEventListener("click", (e) => {
+            e.preventDefault();
+            scrollToEmail();
+          });
+        });
+
+      function pointEyeAt(x, y) {
+        if (!eyeIcon || !eyeBall) return;
+        const rect = eyeIcon.getBoundingClientRect();
+        if (rect.width === 0 || rect.height === 0) {
+          eyeBall.setAttribute("cx", "12");
+          eyeBall.setAttribute("cy", "12");
+          return;
+        }
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = x - cx;
+        const dy = y - cy;
+        const angle = Math.atan2(dy, dx);
+        const maxOffset = 4; // مدى حركة البؤبؤ داخل العين
+        const newCX = 12 + Math.cos(angle) * maxOffset;
+        const newCY = 12 + Math.sin(angle) * maxOffset;
+        eyeBall.setAttribute("cx", newCX.toFixed(2));
+        eyeBall.setAttribute("cy", newCY.toFixed(2));
+      }
+
+      document.addEventListener("mousemove", (e) => {
+        pointEyeAt(e.clientX, e.clientY);
+      });
+
+      document.addEventListener("mouseleave", () => {
+        eyeBall.setAttribute("cx", "12");
+        eyeBall.setAttribute("cy", "12");
+      });
+    </script>
+  </body>
+</html>
+</html>

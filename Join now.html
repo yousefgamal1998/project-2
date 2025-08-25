@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>انضم الآن - World Languages Hub</title>
+    <link rel="icon" type="image/png" href="image/logo.png">
+    <style>
+      /* Reused base styles from index.html so header/footer match the site */
+      :root {
+        --accent: #ff6600;
+      }
+      /* Make the page a column flex container so footer can stick to bottom
+         when content is short (classic sticky footer pattern) */
+      body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        background: black;
+        color: #fff;
+        font-family: "Segoe UI", "Arial", sans-serif;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+       header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 60px 0 60px;
+        height: 8em;
+        background: linear-gradient(120deg, #141414 60%, #231f1e 100%);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+      .logo a {
+        text-decoration: none;
+        font-size: 2.8rem;
+        font-weight: bold;
+        color: #ff000d;
+        letter-spacing: 2px;
+        font-family: "Arial Black", "Arial", sans-serif;
+        font-style: oblique;
+
+        height: 32px;
+      }
+      textPath {
+        font-size: x-large;
+      }
+      svg {
+        width: 8em;
+        margin-bottom: 1em;
+      }
+
+      .top-actions {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+      .language-select {
+        background: linear-gradient(120deg, #141414 60%, #231f1e 100%);
+        color: white;
+        border: 1px solid #aaa;
+        border-radius: 4px;
+        padding: 6px 18px;
+        font-size: 1rem;
+        outline: none;
+        margin-right: 8px;
+      }
+      .language-select option {
+        background-color: #000; /* خلفية القائمة */
+        color: #fff; /* لون النص الافتراضي */
+      }
+
+      .sign-in {
+        background: #ff6600;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 22px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .sign-in:hover {
+        background: #b0060f;
+      }
+      .logo {
+        margin-top: 0;
+      }
+    
+      /* Main signup card */
+      main {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 36px 20px 80px;
+        flex: 1 1 auto;
+      }
+      .signup-card {
+        width: 100%;
+        max-width: 1100px; /* widened overall card so second column can grow */
+        display: grid;
+        grid-template-columns: 1fr 520px; /* increased form column width */
+        gap: 28px;
+        align-items: center;
+      }
+      /* allow flex children to shrink/grow correctly so inputs fill available space */
+      .form-row > div {
+        min-width: 0;
+      }
+      .promo {
+        background: linear-gradient(120deg, #141414 60%, #231f1e 100%);
+        border-radius: 16px;
+        padding: 36px;
+        color: #fff;
+        box-shadow: 0 8px 30px #0008;
+      }
+      .promo h1 {
+        font-size: 2.2rem;
+        margin: 0 0 12px;
+      }
+      .promo p {
+        color: #ddd;
+        line-height: 1.6;
+      }
+
+      .form-wrap {
+        background: linear-gradient(120deg, #0f0f0f 50%, #231f1e 100%);
+        padding: 28px;
+        border-radius: 16px;
+        box-shadow: 0 6px 20px #0008;
+      }
+      .form-title {
+        font-size: 1.6rem;
+        margin: 0 0 8px;
+      }
+      .form-sub {
+        color: #ccc;
+        margin: 0 0 18px;
+      }
+
+      .form-grid {
+        display: grid;
+        gap: 12px;
+      }
+      .form-row {
+        display: flex;
+        gap: 12px;
+      }
+      label {
+        display: block;
+        font-size: 0.95rem;
+        margin-bottom: 6px;
+        color: #eee;
+      }
+      .form-input {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 8px;
+        border: 2px solid #aaa;
+        background: rgba(0, 0, 0, 0.35);
+        color: #fff;
+        font-size: 1rem;
+        outline: none;
+        box-sizing: border-box;
+      }
+      .form-input:focus {
+        border-color: #fff;
+        box-shadow: 0 0 0 4px #fff2;
+      }
+      .form-input.invalid {
+        border-color: #e50914;
+        box-shadow: 0 0 0 4px #e5091444;
+      }
+      .form-input.valid {
+        border-color: #1dd05d;
+        box-shadow: 0 0 0 4px #1dd05d44;
+      }
+
+      .password-wrapper {
+        position: relative;
+      }
+
+      /* نزيد الـ padding على اليمين حتى لا يختفي النص تحت الزر */
+      .password-wrapper .form-input {
+        padding-right: 48px; /* عدّل القيمة إذا أردت مسافة أكبر/أصغر */
+        box-sizing: border-box;
+      }
+
+      /* زر العين داخل الحقل */
+      .password-wrapper #toggleEye {
+        position: absolute;
+        inset-inline-end: 8px; /* يدعم RTL/LTR بشكل منطقي */
+        right: 8px;            /* احتياطي لمدى التوافق */
+        top: 50%;
+        transform: translateY(-50%);
+        height: 30px;
+        width: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        color: inherit;
+        padding: 0;
+        cursor: pointer;
+      }
+
+      /* تصغير وتنسيق الـ SVG داخل الزر */
+      .password-wrapper #toggleEye svg {
+        width: 20px;
+        height: 20px;
+        margin: 0;
+        display: block;
+      }
+
+      /* يمكن إظهار/إخفاء خط الـ slash عن طريق الـ JS (نترك العرض/الإخفاء للـJS) */
+      #eye-slash {
+        display: none;
+      }
+
+      .meta {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        justify-content: space-between;
+        margin-top: 4px;
+      }
+      .terms {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: #fff;
+        padding: 12px 18px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+      .btn-primary[disabled] {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      /* success box */
+      .success {
+        background: #0b3;
+        color: #012;
+        padding: 12px;
+        border-radius: 8px;
+        display: none;
+      }
+
+      footer {
+        background: #111;
+        padding: 20px;
+        text-align: center;
+        margin-top: 36px;
+      }
+
+@media (max-width: 968px) {
+        header {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 18px 6px 0 6px;
+          height: auto;
+        }
+      }
+
+      @media (max-width: 900px) {
+        .signup-card {
+          grid-template-columns: 1fr;
+          max-width: 720px;
+        }
+      }
+      @media (max-width: 480px) {
+        header {
+          padding: 18px 12px;
+          height: auto;
+        }
+        .logo a {
+          font-size: 1.6rem;
+        }
+        .form-wrap {
+          padding: 18px;
+        }
+        .promo {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body dir="ltr">
+    <!-- Header (copied to preserve look) -->
+    <!-- Top Bar -->
+    <header>
+      <div class="logo">
+        <a href="#" style="display: inline-block; padding: 0; margin: 0">
+          <svg
+            width="100%"
+            height="auto"
+            viewBox="44 22 350 30"
+            preserveAspectRatio="xMidYMid meet"
+            xmlns="http://www.w3.org/2000/svg"
+            style="display: block; border-radius: 20px; overflow: hidden"
+          >
+            <defs>
+              <linearGradient
+                id="text-gradient"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="0%"
+              >
+                <stop offset="0%" stop-color="#ff6600" />
+                <stop offset="100%" stop-color="#ff6600" />
+              </linearGradient>
+
+              <!-- قللنا النهاية إلى 440 -->
+              <path id="curve" d="M0,65 Q65,25 440,50" />
+            </defs>
+
+            <text
+              font-family="'Arial Black', Arial, sans-serif"
+              font-size="44"
+              fill="url(#text-gradient)"
+              letter-spacing="3"
+              text-anchor="middle"
+            >
+              <textPath xlink:href="#curve" startOffset="50%">
+                World Languages Hub
+              </textPath>
+            </text>
+          </svg>
+        </a>
+      </div>
+      <div class="top-actions">
+        <select class="language-select" aria-label="Language select">
+          <option value="en">English</option>
+          <option value="ar">العربية</option>
+        </select>
+        <button id="headerSignIn" class="sign-in" onclick="location.href='index.html'" aria-label="Sign in" title="Sign in">
+          Sign In
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <div class="signup-card">
+        <div class="promo">
+          <h1 data-i18n="promo_heading">انشئ حسابك واحصل على خصم 15% على أول كورس</h1>
+          <p data-i18n="promo_text">
+            انضم إلى مجتمع المتعلمين واحصل على محتوى تعليمي احترافي في لغات
+            متعددة — دروس مباشرة، مواد مرئية، واختبارات تقدم مستمر.
+          </p>
+          <ul style="color: #ddd; margin-top: 18px">
+            <li data-i18n="li1">دورات مُعدة بواسطة معلمين معتمدين</li>
+            <li data-i18n="li2">مرونة في التعلم وتسجيل الحصص</li>
+            <li data-i18n="li3">شهادات عند الانتهاء</li>
+          </ul>
+        </div>
+
+        <div class="form-wrap" aria-labelledby="form-title">
+          <h2 id="form-title" class="form-title" data-i18n="form_title">إنشاء حساب جديد</h2>
+          <p class="form-sub" data-i18n="form_sub">
+            املأ البيانات التالية لإنشاء حسابك في World Languages Hub
+          </p>
+
+          <div class="form-grid">
+            <div>
+              <label for="full-name" data-i18n="label_name">الاسم الكامل</label>
+              <input
+                id="full-name"
+                class="form-input"
+                type="text"
+                placeholder="أدخل اسمك"
+                data-i18n-placeholder="ph_name"
+                required
+              />
+            </div>
+
+            <div>
+              <label for="email" data-i18n="label_email">البريد الإلكتروني</label>
+              <input
+                id="email"
+                class="form-input"
+                type="email"
+                placeholder="example@domain.com"
+                data-i18n-placeholder="ph_email"
+                required
+              />
+            </div>
+
+            <div class="form-row">
+              <div style="flex: 1">
+                <label for="password" data-i18n="label_pass">كلمة المرور</label>
+                <div class="password-wrapper">
+                  <input
+                    id="password"
+                    class="form-input"
+                    type="password"
+                    placeholder="6 أحرف أو أكثر"
+                    data-i18n-placeholder="ph_pass"
+                    autocomplete="new-password"
+                    required
+                  />
+                  <!-- الآن الزر داخل الـ wrapper ليظهر فوق الحقل -->
+                  <button
+                    id="toggleEye"
+                    type="button"
+                    aria-pressed="false"
+                    aria-label="Toggle password visibility"
+                    title="Toggle password visibility"
+                  >
+                    <!-- SVG أيقونة العين -->
+                    <svg
+                      id="eye-icon"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M1 12C2.7 7.6 7.1 4.5 12 4.5C16.9 4.5 21.3 7.6 23 12C21.3 16.4 16.9 19.5 12 19.5C7.1 19.5 2.7 16.4 1 12Z"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      />
+                      <circle
+                        id="eye-ball"
+                        cx="12"
+                        cy="12"
+                        r="3.5"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      />
+                      <line
+                        id="eye-slash"
+                        x1="5"
+                        y1="19"
+                        x2="19"
+                        y2="5"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        style="display: none"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div style="flex: 1">
+                <label for="confirm" data-i18n="label_confirm">تأكيد كلمة المرور</label>
+                <input
+                  id="confirm"
+                  class="form-input"
+                  type="password"
+                  placeholder="أعد إدخال كلمة المرور"
+                  data-i18n-placeholder="ph_confirm"
+                  required
+                />
+              </div>
+            </div>
+
+            <div>
+              <label for="phone" data-i18n="label_phone">رقم الهاتف (اختياري)</label>
+              <input
+                id="phone"
+                class="form-input"
+                type="tel"
+                placeholder="010xxxxxxxx"
+                data-i18n-placeholder="ph_phone"
+              />
+            </div>
+
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 12px;
+              "
+            >
+              <label class="terms" style="margin: 0">
+                <input
+                  id="agree"
+                  type="checkbox"
+                  style="width: 18px; height: 18px"
+                />
+                <span data-i18n="terms_html">
+                  أوافق على
+                  <a
+                    href="#"
+                    style="color: var(--accent); text-decoration: underline"
+                    >الشروط والأحكام</a
+                  ></span
+                >
+              </label>
+              <div style="font-size: 0.9rem; color: #ccc">
+                <span data-i18n="have_account">هل لديك حساب؟</span>
+                <a id="loginLink" href="index.html" style="color: var(--accent)">تسجيل الدخول</a>
+              </div>
+            </div>
+
+            <div
+              style="
+                display: flex;
+                gap: 12px;
+                align-items: center;
+                margin-top: 6px;
+              "
+            >
+              <button id="createBtn" class="btn-primary" disabled>
+                إنشاء الحساب
+              </button>
+              <div class="success" id="successBox">
+                تم إنشاء الحساب بنجاح — جاري التحويل...
+              </div>
+            </div>
+          </div>
+
+         
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p data-i18n="footer">© 2025 World Languages Hub - جميع الحقوق محفوظة</p>
+    </footer>
+
+    <script>
+       // منع المتصفح من حفظ موضع التمرير بعد الريفرش
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+      // Basic client-side validation and UI behaviors
+      const langSelect = document.querySelector(".language-select");
+      const body = document.body;
+      const fullName = document.getElementById("full-name");
+      const email = document.getElementById("email");
+      const password = document.getElementById("password");
+      const confirm = document.getElementById("confirm");
+      const phone = document.getElementById("phone");
+      const agree = document.getElementById("agree");
+      const createBtn = document.getElementById("createBtn");
+      const successBox = document.getElementById("successBox");
+      const translations = {
+        ar: {
+          create: "إنشاء الحساب",
+          creating: "جاري الإنشاء...",
+          success: "تم إنشاء الحساب بنجاح — جاري التحويل...",
+          promo_heading: "انشئ حسابك واحصل على خصم 15% على أول كورس",
+          promo_text:
+            "انضم إلى مجتمع المتعلمين واحصل على محتوى تعليمي احترافي في لغات متعددة — دروس مباشرة، مواد مرئية، واختبارات تقدم مستمر.",
+          li1: "دورات مُعدة بواسطة معلمين معتمدين",
+          li2: "مرونة في التعلم وتسجيل الحصص",
+          li3: "شهادات عند الانتهاء",
+          form_title: "إنشاء حساب جديد",
+          form_sub: "املأ البيانات التالية لإنشاء حسابك في World Languages Hub",
+          label_name: "الاسم الكامل",
+          label_email: "البريد الإلكتروني",
+          label_pass: "كلمة المرور",
+          label_confirm: "تأكيد كلمة المرور",
+          label_phone: "رقم الهاتف (اختياري)",
+          ph_name: "أدخل اسمك",
+          ph_email: "example@domain.com",
+          ph_pass: "6 أحرف أو أكثر",
+          ph_confirm: "أعد إدخال كلمة المرور",
+          ph_phone: "010xxxxxxxx",
+          terms_html:
+            'أوافق على <a href="#" style="color: var(--accent); text-decoration: underline">الشروط والأحكام</a>',
+          have_account: "هل لديك حساب؟",
+          login: "تسجيل الدخول",
+          footer: "© 2025 World Languages Hub - جميع الحقوق محفوظة",
+        },
+        en: {
+          create: "Create account",
+          creating: "Signing up...",
+          success: "Account created — redirecting...",
+          promo_heading: "Create your account and get 15% off your first course",
+          promo_text:
+            "Join our learning community and get professional multilingual content — live lessons, video materials, and ongoing progress tests.",
+          li1: "Courses prepared by certified instructors",
+          li2: "Flexible learning and session recordings",
+          li3: "Certificates upon completion",
+          form_title: "Create a new account",
+          form_sub: "Fill in the details to create your World Languages Hub account",
+          label_name: "Full name",
+          label_email: "Email",
+          label_pass: "Password",
+          label_confirm: "Confirm password",
+          label_phone: "Phone (optional)",
+          ph_name: "Enter your name",
+          ph_email: "example@domain.com",
+          ph_pass: "6 characters or more",
+          ph_confirm: "Re-enter your password",
+          ph_phone: "010xxxxxxxx",
+          terms_html:
+            'I agree to the <a href="#" style="color: var(--accent); text-decoration: underline">terms & conditions</a>',
+          have_account: "Have an account?",
+          login: "Sign in",
+          footer: "© 2025 World Languages Hub - All rights reserved",
+        },
+      };
+
+      function updateCreateState() {
+        const emailOk = /^[^@]+@[^@]+\.[^@]+$/.test(email.value.trim());
+        const passOk = password.value.length >= 6;
+        const match =
+          password.value === confirm.value && password.value.length > 0;
+        const nameOk = fullName.value.trim().length >= 2;
+        createBtn.disabled = !(
+          emailOk &&
+          passOk &&
+          match &&
+          nameOk &&
+          agree.checked
+        );
+
+        email.classList.toggle("valid", emailOk);
+        email.classList.toggle("invalid", !emailOk && email.value.length > 0);
+        password.classList.toggle("valid", passOk);
+        password.classList.toggle(
+          "invalid",
+          password.value.length > 0 && !passOk
+        );
+        confirm.classList.toggle("valid", match);
+        confirm.classList.toggle("invalid", confirm.value.length > 0 && !match);
+      }
+
+      [fullName, email, password, confirm, agree].forEach((el) =>
+        el.addEventListener("input", updateCreateState)
+      );
+
+      createBtn.addEventListener("click", () => {
+        createBtn.disabled = true;
+        createBtn.textContent =
+          translations[
+            body.lang === "ar" || body.dir === "rtl" ? "ar" : "en"
+          ].creating;
+
+        // Fake async create (replace with real API call)
+        setTimeout(() => {
+          successBox.style.display = "block";
+          createBtn.textContent =
+            translations[
+              body.lang === "ar" || body.dir === "rtl" ? "ar" : "en"
+            ].create;
+          // Redirect to main page
+          setTimeout(() => (location.href = "World Languages Hub.html"), 1200);
+        }, 900);
+      });
+
+      function applyLanguage(lang) {
+        const isAr = lang === "ar";
+        document.documentElement.lang = lang;
+        body.lang = lang;
+        body.dir = isAr ? "rtl" : "ltr";
+
+        // simple mapping: set textContent/innerHTML and placeholders for elements with data-i18n and data-i18n-placeholder
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = el.getAttribute("data-i18n");
+          if (!key) return;
+          // use innerHTML for terms to keep the link markup
+          if (key === "terms_html") {
+            el.innerHTML = translations[lang][key] || "";
+          } else {
+            el.textContent = translations[lang][key] || "";
+          }
+        });
+
+        document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+          const key = el.getAttribute("data-i18n-placeholder");
+          if (!key) return;
+          el.placeholder = translations[lang][key] || "";
+        });
+
+        // Update form title and main button + success box + login link label
+        const formTitle = document.getElementById("form-title");
+        if (formTitle) formTitle.textContent = translations[lang].form_title;
+
+        createBtn.textContent = translations[lang].create;
+        successBox.textContent = translations[lang].success;
+
+        const loginLink = document.getElementById("loginLink");
+        if (loginLink) loginLink.textContent = translations[lang].login;
+
+        // update header sign in button text/labels
+        const headerSignIn = document.getElementById("headerSignIn");
+        if (headerSignIn) {
+          headerSignIn.textContent = translations[lang].login;
+          headerSignIn.setAttribute("aria-label", translations[lang].login);
+          headerSignIn.title = translations[lang].login;
+        }
+      }
+
+      // load saved language or use document language
+      // Force default language to English.
+      // If you want to always start in English regardless of previously saved preference,
+      // set initialLang to 'en' as below.
+      // (The language selector still works and will save future choices to localStorage.)
+      const savedLang = localStorage.getItem("wlh_lang");
+      const initialLang = "en";
+      // set select to proper value
+      langSelect.value = initialLang === "ar" ? "ar" : "en";
+      applyLanguage(langSelect.value);
+
+      langSelect.addEventListener("change", function () {
+        const chosen = this.value === "ar" ? "ar" : "en";
+        applyLanguage(chosen);
+        localStorage.setItem("wlh_lang", chosen);
+      });
+
+      // initial
+      updateCreateState();
+
+      const eyeIcon = document.getElementById("eye-icon");
+      const eyeBall = document.getElementById("eye-ball");
+
+      function pointEyeAt(x, y) {
+        if (!eyeIcon || !eyeBall) return;
+        const rect = eyeIcon.getBoundingClientRect();
+        if (rect.width === 0 || rect.height === 0) {
+          eyeBall.setAttribute("cx", "12");
+          eyeBall.setAttribute("cy", "12");
+          return;
+        }
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = x - cx;
+        const dy = y - cy;
+        const angle = Math.atan2(dy, dx);
+        const maxOffset = 4; // مدى حركة البؤبؤ داخل العين
+        const newCX = 12 + Math.cos(angle) * maxOffset;
+        const newCY = 12 + Math.sin(angle) * maxOffset;
+        eyeBall.setAttribute("cx", newCX.toFixed(2));
+        eyeBall.setAttribute("cy", newCY.toFixed(2));
+      }
+
+      document.addEventListener("mousemove", (e) => {
+        pointEyeAt(e.clientX, e.clientY);
+      });
+
+      document.addEventListener("mouseleave", () => {
+        if (!eyeBall) return;
+        eyeBall.setAttribute("cx", "12");
+        eyeBall.setAttribute("cy", "12");
+      });
+
+      (function () {
+                const wrapper = document.querySelector(".password-wrapper");
+                if (!wrapper) return;
+
+                const toggle = wrapper.querySelector("#toggleEye");
+                const eyeSlash = wrapper.querySelector("#eye-slash");
+                const pw = document.getElementById("password");
+                const confirm = document.getElementById("confirm");
+
+                if (!toggle || !pw || !confirm) return;
+
+                // set initial state: inputs start as password
+                const setSlash = (isPassword) => {
+                  if (!eyeSlash) return;
+                  eyeSlash.style.display = isPassword ? "block" : "none";
+                };
+
+                setSlash(pw.type === "password");
+                toggle.setAttribute("aria-pressed", String(pw.type !== "password"));
+
+                toggle.addEventListener("click", () => {
+                  const nowHidden = pw.type === "password";
+                  const newType = nowHidden ? "text" : "password";
+                  pw.type = newType;
+                  confirm.type = newType;
+                  setSlash(newType === "password");
+                  toggle.setAttribute("aria-pressed", String(!nowHidden));
+                });
+              })();
+    </script>
+  </body>
+</html>
